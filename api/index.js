@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRouter from './routes/user.route.js'
 dotenv.config();
 
 
@@ -19,3 +20,11 @@ app.listen(3000, ()=>{
     console.log('Server is running on port 3000!!!!')
 }
 );
+
+
+/**Con esto se esta llamando a todas las rutas que hay dentro del archivo user.route
+ * Lo primera variable es la ruta
+ * 
+ * 
+ */
+app.use('/api/user', userRouter)
