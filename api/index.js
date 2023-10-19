@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'
+import authRouter from './routes/auth.route.js'
 dotenv.config();
 
 
@@ -16,6 +17,8 @@ mongoose
 
 const app = express();
 
+app.use(express.json())
+
 app.listen(3000, ()=>{
     console.log('Server is running on port 3000!!!!')
 }
@@ -24,7 +27,9 @@ app.listen(3000, ()=>{
 
 /**Con esto se esta llamando a todas las rutas que hay dentro del archivo user.route
  * Lo primera variable es la ruta
+ * La segunda variable es el path 
  * 
  * 
  */
 app.use('/api/user', userRouter)
+app.use('/api/auth', authRouter)
