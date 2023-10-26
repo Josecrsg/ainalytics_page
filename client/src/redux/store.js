@@ -1,25 +1,26 @@
-// Importando la función "configureStore" de la librería "@reduxjs/toolkit".
-import { configureStore } from '@reduxjs/toolkit'
-
-// Importando el reducidor "userReducer" del archivo "user/userSlice".
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import userReducer from './user/userSlice'
+import storage from 'redux-persist/lib/storage'
+import {persistReducer, persistStore} from 'redux-persist'
+
+
+const rootReducer = combineReducers({user: userReducer})
+
+const persistConfig ={
+  key: 'root',
+  storage,
+  version:1,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // Configurando y exportando el store de Redux.
-export const store = configureStore({
-  // Objeto que define los reducidores que se usarán en el store.
-  reducer: {
-    user: userReducer,    // Asociando el "userReducer" al campo "user" del estado global.
-  },
-
-  /**
-   * Este comentario explica que el middleware personalizado a continuación 
-   * se usa para evitar errores cuando las variables no están serializadas.
-   */
-  
-  // Configurando middleware para el store.
-  middleware: (getDefaultMiddleware) => 
-    getDefaultMiddleware({
-      // Deshabilitando la comprobación de serialización.
-      serializableCheck: false,
+export const store = configureStore({  
+  reducer: persistedReducer,// Objeto que define los reducidores que se usarán en el store
+    middleware: (getDefaultMiddleware) => 
+      getDefaultMiddleware({        
+        serializableCheck: false,
   }),
 })
+
+export const persistor = persistStore(store)
