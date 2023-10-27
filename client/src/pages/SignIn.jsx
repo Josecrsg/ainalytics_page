@@ -3,22 +3,14 @@ import React, { useState } from 'react'  // Importa React y el hook useState par
 import {Link, useNavigate} from 'react-router-dom' // Importa el componente Link y el hook useNavigate de react-router-dom.
 import { useDispatch, useSelector } from 'react-redux' // Importa los hooks useDispatch y useSelector de react-redux.
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice' // Importa las acciones del slice de usuario.
+import OAuth from '../components/OAuth'
 
-// Declara el componente funcional SignUp.
-export default function SignUp() {
 
-  // Inicializa el estado formData como un objeto vacío.
-  const [formData, setFormData] = useState({}) // Hook para gestionar el estado del formulario.
-  
-  // Utiliza el hook useSelector para acceder al estado del usuario en Redux.
-  const {loading, error} = useSelector((state) => state.user) // Obtiene loading y error del estado de usuario.
-  
-  // Inicializa navigate utilizando el hook useNavigate.
-  const navigate = useNavigate() // Permite navegar programáticamente a diferentes rutas.
-  
-  // Inicializa dispatch utilizando el hook useDispatch.
-  const dispatch = useDispatch() // Permite despachar acciones a Redux.
-
+export default function SignUp() {  
+  const [formData, setFormData] = useState({})// Inicializa el estado formData como un objeto vacío. // Hook para gestionar el estado del formulario.  
+  const {loading, error} = useSelector((state) => state.user)// Utiliza el hook useSelector para acceder al estado del usuario en Redux. // Obtiene loading y error del estado de usuario.  
+  const navigate = useNavigate() // Inicializa navigate utilizando el hook useNavigate.// Permite navegar programáticamente a diferentes rutas.  
+  const dispatch = useDispatch()// Inicializa dispatch utilizando el hook useDispatch. // Permite despachar acciones a Redux.
   // Declara la función handleChange para manejar los cambios en los inputs del formulario.
   const handleChange = (e) =>{
     setFormData({
@@ -29,35 +21,30 @@ export default function SignUp() {
 
   // Declara la función handleSubmit para manejar el envío del formulario.
   const handleSubmit = async (e)=>{
-    e.preventDefault(); // Evita que el formulario realice la acción predeterminada de enviar/recargar.
-    
+    e.preventDefault(); // Evita que el formulario realice la acción predeterminada de enviar/recargar.    
     try{
-      dispatch(signInStart()) // Despacha la acción signInStart a Redux.
-      
+      dispatch(signInStart()) // Despacha la acción signInStart a Redux.      
       // Realiza una solicitud POST a la API de autenticación.
       const res = await fetch('api/auth/signin',
       {
-        method: 'POST', // Método POST.
+        method: 'POST', 
         headers:{
           'Content-Type': 'application/json' // Establece el tipo de contenido a JSON.
         },
         body: JSON.stringify(formData), // Convierte el formData a JSON.
       })
       const data = await res.json() // Convierte la respuesta a JSON.
-      console.log(data) // Imprime la data en consola.
+      console.log(data) // Imprime la data en consola.     
       
-      // Si la respuesta no es exitosa, despacha la acción signInFailure con el mensaje de error.
-      if(data.success === false){
+      if(data.success === false){ // Si la respuesta no es exitosa, despacha la acción signInFailure con el mensaje de error.
         dispatch(signInFailure(data.message))
         return
-      }
-      
-      // Si la respuesta es exitosa, despacha la acción signInSuccess con la data y redirige al usuario a la página principal.
-      dispatch(signInSuccess(data))
+      }            
+      dispatch(signInSuccess(data))// Si la respuesta es exitosa, despacha la acción signInSuccess con la data y redirige al usuario a la página principal.
       navigate('/')
     }
-    // En caso de que se produzca un error en el bloque try, se captura y se despacha la acción signInFailure con el mensaje de error.
-    catch(error){
+    
+    catch(error){// En caso de que se produzca un error en el bloque try, se captura y se despacha la acción signInFailure con el mensaje de error.
       dispatch(signInFailure(error.message))
     }
   }
@@ -85,6 +72,7 @@ export default function SignUp() {
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80'>
           {loading ? 'Loading...' : 'Sign In'} {/** Si loading es verdadero, muestra "Loading...", de lo contrario muestra "Sign In" */}
         </button>
+        <OAuth/>
       </form>
       <div className='flex gap-2 mt-5 '>
         <p>Dont have an account?</p>

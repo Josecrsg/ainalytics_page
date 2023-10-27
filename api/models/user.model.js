@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
         // Especificando que este campo es obligatorio.
         required: true,        
     },
+    avatar: {
+        type: String,
+        default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+
+    },
 // Indicando que se deben registrar automáticamente las fechas de creación y actualización del registro.
 }, {timestamps: true});
 
