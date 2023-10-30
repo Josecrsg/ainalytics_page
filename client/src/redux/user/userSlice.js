@@ -1,6 +1,7 @@
 // Importando la función "createSlice" de la librería "@reduxjs/toolkit".
 import { createSlice } from "@reduxjs/toolkit";
 
+
 // Definiendo un estado inicial para la sección de "user" del store.
 const initialState = {
     currentUser: null,   // Estado inicial del usuario actual. Comienza como nulo.
@@ -24,12 +25,45 @@ const userSlice = createSlice({
         signInFailure: (state, action) =>{    // Reductor cuando el inicio de sesión falla.
             state.error = action.payload;  // Establece el error con la carga útil de la acción.
             state.loading = false;      // Establece el estado de carga en falso.            
-        }
+        },
+        updateUserStart: (state) =>{
+            state.loading = true
+        },
+        updateUserSuccess: (state, action) =>{
+            state.currentUser = action.payload;
+            state.loading = false;
+            state.error = null
+        },
+        updateUserFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading =  false;
+        },
+        deleteUserStart: (state) =>{
+            state.loading = false
+        },
+        deleteUserSuccess: (state) =>{
+            state.currentUser = null;
+            state.loading = false;
+            state.error = null;
+        },
+        deleteUserFailure: (state, action) =>{
+            state.error = action.payload;
+            state.loading = false;
+        },
     }
 })
 
 // Exportando las acciones creadas por "createSlice".
-export const {signInStart, signInSuccess, signInFailure} = userSlice.actions;
+export const {signInStart, 
+                signInSuccess, 
+                signInFailure, 
+                updateUserFailure, 
+                updateUserSuccess, 
+                updateUserStart,
+                deleteUserFailure,
+                deleteUserStart,
+                deleteUserSuccess,
+            } = userSlice.actions;
 
 // Exportando el reducidor creado por "createSlice".
 export default userSlice.reducer;
