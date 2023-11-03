@@ -46,6 +46,6 @@ export const updateListing = async (req, res, next) =>{
         )
         res.status(200).json(updateListing)
     } catch (error) {
-        next(error) 
+        next(error)
     }
 }
