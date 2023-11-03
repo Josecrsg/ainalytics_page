@@ -40,7 +40,7 @@ export const updateListing = async (req, res, next) =>{
 
     try {
         const updateListing = await Listing.findByIdAndUpdate(
-            req.params.id,
+            req.params.body,
             req.body,
             {new: true}
         )
