@@ -6,7 +6,7 @@ import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
-import { UpdateListing } from './pages/UpdateListing';
+import UpdateListing from './pages/UpdateListing';
 import { CreateListing } from './pages/CreateListing';
 import Listing from './pages/Listing'
 
