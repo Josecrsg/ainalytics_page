@@ -214,7 +214,7 @@ export default function Search() {
             <label className='font-semibold'>Sort:</label>
             <select
               onChange={handleChange}
-              defaultValue={'created_at_desc'}
+              defaultValue={'createdAt_desc'}
               id='sort_order'
               className='border rounded-lg p-3'
             >
