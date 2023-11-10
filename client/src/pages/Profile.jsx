@@ -132,23 +132,27 @@ export default function Profile () {
   }
 
   const handleListingDelete = async(listingId)=>{
-    try {
-      const res = await fetch(`/api/listing/delete/${listingId}`,{
-        method: 'DELETE'
-      })
-      const data = await res.json()
-      if(data.success === false){
-        console.log(data.message)
-        return
+    // Se añade una ventana de confirmación antes de proceder con la eliminación.
+    if(window.confirm('¿Estás seguro de que quieres eliminar este blog? Esta acción no se puede deshacer.')) {
+      try {
+        const res = await fetch(`/api/listing/delete/${listingId}`,{
+          method: 'DELETE'
+        })
+        const data = await res.json()
+        if(data.success === false){
+          console.log(data.message)
+          return
+        }
+
+        // Actualiza el estado para reflejar que el blog ha sido eliminado.
+        setUserListings((prev) => 
+        prev.filter((listing)=> listing._id !== listingId))
+      } catch (error) {
+        console.error('Error al eliminar el blog:', error)
       }
-
-      setUserListings((prev) => 
-      prev.filter((listing)=> listing._id !== listingId))
-    } catch (error) {
-      
     }
-
   }
+
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
@@ -168,7 +172,7 @@ export default function Profile () {
         </p>
         <input type="text" 
                 id= 'username' 
-                placeholder='username' 
+                placeholder='Usuario' 
                 defaultValue= {currentUser.username} 
                 className='border p-3 rounded-lg' 
                 onChange={handleChange}
@@ -182,32 +186,32 @@ export default function Profile () {
                 />
         <input type="password" 
                 id='password' 
-                placeholder='password' 
+                placeholder='Contraseña' 
                 className='border p-3 rounded-lg' 
                 onChange={handleChange}
                 />   
         <button
           disabled={loading}
           className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>
-          {loading ? 'Loading...' : 'Update'}
+          {loading ? 'Loading...' : 'Actualizar'}
         </button>
         <Link to= {'/create-Listing'} className= 'bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'>
-          Create Listing
+          Crear Blogs
         </Link>  
       </form>
       <div className='flex justify-between mt-4'>
-        <span onClick={handleDeleteUser} className= 'bg-red-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 cursor-pointer'>Delete account</span>
-        <span onClick={handleSignOut} className='bg-red-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 cursor-pointer'>Sign Out</span>
+        <span onClick={handleDeleteUser} className= 'bg-red-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 cursor-pointer'>Borrar cuenta</span>
+        <span onClick={handleSignOut} className='bg-red-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 cursor-pointer'>Desconectar</span>
       </div>
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
       <p className='text-green-700 mt-5'>{updateSuccess ? 'User is updated successfully' :  ''}</p>
-      <button onClick={handleShowListings} className='text-green-700 w-full '>Show Listings</button>
+      <button onClick={handleShowListings} className='text-green-700 w-full '>Mostrar Blogs</button>
       <p className='text-red-700 mt-5'>{showListingsError ? 'Error showing listings' : ''}</p>
 
       {userListings &&
        userListings.length > 0 &&
        <div className='flex flex-col gap-4'>
-        <h1 className='text-center mt-7 text-2xl font-semibold'>Your Listings</h1>  
+        <h1 className='text-center mt-7 text-2xl font-semibold'>Blogs creados</h1>  
        {userListings.map((listing)=>(
         <div key={listing._id} className='border rounded-lg p-3 flex justify-between items-center gap-4'>
           <Link to={`/listing/${listing._id}`}>
@@ -224,9 +228,9 @@ export default function Profile () {
           </Link>
 
           <div className='flex flex-col items-center'>
-            <button onClick={()=>handleListingDelete(listing._id)} className='text-red-700 uppercase'>Delete</button>            
+            <button onClick={()=>handleListingDelete(listing._id)} className='text-red-700 uppercase'>Borrar</button>            
             <Link to={`/update-listing/${listing._id}`}>
-              <button className='text-green-700 uppercase'>Edit</button>
+              <button className='text-green-700 uppercase'>Editar</button>
             </Link>
           </div>
         </div>

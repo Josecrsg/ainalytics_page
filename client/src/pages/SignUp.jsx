@@ -79,31 +79,31 @@ export default function SignUp() {
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>
-        Sign Up
+        Resgistra tu cuenta
       </h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input type="text" placeholder='username' className='border p-3 rounded-lg' id='username' onChange={handleChange} />
+        <input type="text" placeholder='Usuario' className='border p-3 rounded-lg' id='username' onChange={handleChange} />
         <input type="text" placeholder='email' className='border p-3 rounded-lg' id='email' onChange={handleChange} />
         <div className="relative">
-          <input type={showPassword ? "text" : "password"} placeholder='password' className='border p-3 rounded-lg w-full' id='password' onChange={handleChange} />
+          <input type={showPassword ? "text" : "password"} placeholder='Contraseña' className='border p-3 rounded-lg w-full' id='password' onChange={handleChange} />
           <span className="absolute right-3 top-3 cursor-pointer" onClick={toggleShowPassword}>
-            {showPassword ? 'Hide' : 'Show'}
+            {showPassword ? 'Ocultar' : 'Mostrar'}
           </span>
         </div>
         <div className="relative">
-          <input type={showPassword ? "text" : "password"} placeholder='Confirm password' className='border p-3 rounded-lg w-full' id='confirmPassword' onChange={handleChange} />
+          <input type={showPassword ? "text" : "password"} placeholder='Confirma contraseña' className='border p-3 rounded-lg w-full' id='confirmPassword' onChange={handleChange} />
           <span className="absolute right-3 top-3 cursor-pointer" onClick={toggleShowPassword}>
-            {showPassword ? 'Hide' : 'Show'}
+            {showPassword ? 'Ocultar' : 'Mostrar'}
           </span>
         </div>
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80'>
-          {loading ? 'Loading...' : 'Sign Up'}
+          {loading ? 'Loading...' : 'Registrarse'}
         </button>
       </form>
       <div className='flex gap-2 mt-5 '>
-        <p>Have an account?</p>
+        <p>¿Tienes cuenta?</p>
         <Link to={'/sign-in'}>
-          <span className='text-blue-700'>Sign In</span>
+          <span className='text-blue-700'>Iniciar sesión</span>
         </Link>
       </div>
       {error && <p className='text-red-500 mt-5'>{error}</p>}

@@ -1,12 +1,12 @@
-import { FaSearch } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react'
+import { FaSearch } from 'react-icons/fa'; // Importar el icono de búsqueda de React
+import { Link, useNavigate } from 'react-router-dom'; // Importar componentes de enrutamiento de React
+import { useSelector } from 'react-redux'; // Importar el selector de Redux
+import { useEffect, useState } from 'react'; // Importar los hooks de efecto y estado de React
 
 export default function Header() {
-  const { currentUser } = useSelector((state) => state.user);
-  const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user); // Obtener el estado actual del usuario desde Redux
+  const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
+  const navigate = useNavigate(); // Función de navegación de React Router
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -22,13 +22,14 @@ export default function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
+
   return (
     <header className='bg-slate-200 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
           <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-slate-500'>Sahand</span>
-            <span className='text-slate-700'>Estate</span>
+            <span className='text-slate-500'>AI</span>
+            <span className='text-slate-700'>nalitycsBI</span>
           </h1>
         </Link>
         <form
@@ -37,7 +38,7 @@ export default function Header() {
         >
           <input
             type='text'
-            placeholder='Search...'
+            placeholder='Buscador de Blogs...'
             className='bg-transparent focus:outline-none w-24 sm:w-64'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -49,12 +50,22 @@ export default function Header() {
         <ul className='flex gap-4'>
           <Link to='/'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Home
+              Inicio
             </li>
           </Link>
-          <Link to='/about'>
+          <Link to='/services'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
-              About
+              Servicios
+            </li>
+          </Link>
+          <Link to='/blogs'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Blogs
+            </li>
+          </Link>
+          <Link to='/contact'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Contacto
             </li>
           </Link>
           <Link to='/profile'>
@@ -65,7 +76,7 @@ export default function Header() {
                 alt='profile'
               />
             ) : (
-              <li className=' text-slate-700 hover:underline'> Sign in</li>
+              <li className=' text-slate-700 hover:underline'> Cuenta</li>
             )}
           </Link>
         </ul>

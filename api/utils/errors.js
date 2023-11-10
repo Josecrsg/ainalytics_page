@@ -1,18 +1,14 @@
-// Comentario explicativo sobre la funcionalidad del código a continuación.
-/**Esto se considera un middleware para controlar los errores */
+// Función para crear un objeto de error personalizado con un código de estado y un mensaje
+export const errorHandler = (statusCode, message) => {
+    // Crear una instancia de Error
+    const error = new Error();
 
-// Definición de la función "errorHandler".
-export const errorHandler = (statusCode, message)=>{
+    // Establecer el código de estado en el objeto de error
+    error.statusCode = statusCode;
 
-    // Creando una nueva instancia del objeto Error.
-    const error = new Error()
+    // Establecer el mensaje de error en el objeto de error
+    error.message = message;
 
-    // Asignando el código de estado al objeto de error.
-    error.statusCode = statusCode
-
-    // Asignando el mensaje al objeto de error.
-    error.message = message
-
-    // Retornando el objeto de error.
-    return error
+    // Devolver el objeto de error creado
+    return error;
 };
