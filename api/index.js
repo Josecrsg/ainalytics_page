@@ -7,6 +7,7 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import contactRouter from './routes/contact.routes.js';
+import path from 'path';
 
 // Cargar las variables de entorno desde un archivo .env
 dotenv.config();
@@ -20,6 +21,9 @@ mongoose
     .catch((err) => {
         console.log(err);
     });
+
+    //Crear un static folder
+    const __dirname = path.resolve();
 
 // Crear una instancia de la aplicación Express
 const app = express();
@@ -40,6 +44,12 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 app.use('/api/contact', contactRouter);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  })
 
 /**Aquí se está creando un middleware para gestionar los errores */
 app.use((err, req, res, next) => {
