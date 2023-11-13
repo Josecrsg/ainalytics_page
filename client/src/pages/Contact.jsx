@@ -65,7 +65,7 @@ export default function Contact() {
       </div>
       <div className='bg-white p-6 rounded-lg shadow-md'>
         <h2 className='text-xl font-semibold mb-2'>Teléfono</h2>
-        <p className='text-gray-600'>+34 912 345 678</p>
+        <p className='text-gray-600'> +34 685 312 915 </p>
       </div>
       <div className='bg-white p-6 rounded-lg shadow-md'>
         <h2 className='text-xl font-semibold mb-2'>Email</h2>
