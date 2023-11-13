@@ -51,7 +51,7 @@ export default function MachineServices() {
       <section className='text-center'>
         <h2 className='text-3xl font-bold text-slate-800 mb-4'>Inicia la Transformación con Inteligencia Artificial</h2>
         <p className='mb-6 text-slate-700'>Descubre cómo nuestras soluciones de machine learning pueden ayudarte a superar tus desafíos empresariales.</p>
-        <Link to='/about'>
+        <Link to='/contact'>
           <button className='bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-300'>Hablemos</button>
         </Link>
       </section>

@@ -56,7 +56,7 @@ export default function Inicio() {
       <section className='text-center'>
         <h2 className='text-3xl font-bold mb-6 text-slate-800'>¿Listo para Desbloquear el Potencial de Tus Datos?</h2>
         <p className='mb-6 text-slate-700'>Contáctanos hoy y convierte tus datos en tu activo más valioso.</p>
-        <Link to='/about'>
+        <Link to='/contact'>
         <button className='bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-300'>Comenzar</button>
         </Link>
       </section>

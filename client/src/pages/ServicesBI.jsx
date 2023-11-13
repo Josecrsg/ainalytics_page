@@ -51,7 +51,7 @@ export default function ServicesBI() {
       <section className='text-center'>
         <h2 className='text-3xl font-bold text-slate-800 mb-4'>Empieza a Navegar Tu Negocio con Datos</h2>
         <p className='mb-6 text-slate-700'>Únete a las empresas líderes que ya están tomando decisiones inteligentes con nuestras soluciones de Business Intelligence.</p>
-        <Link to='/about'>
+        <Link to='/contact'>
           <button className='bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300'>Consigue una Demo</button>
         </Link>
       </section>

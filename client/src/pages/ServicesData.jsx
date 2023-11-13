@@ -51,7 +51,7 @@ export default function DataServices() {
       <section className='text-center'>
         <h2 className='text-3xl font-bold text-slate-800 mb-4 '>Empieza a Transformar Datos en Decisión</h2>
         <p className='mb-6 text-slate-700'>Conéctate con nosotros y comienza el viaje hacia un análisis de datos que impulsa el éxito.</p>
-        <Link to='/about'>
+        <Link to='/contact'>
           <button className='bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-300'>Contáctanos</button>
         </Link>
       </section>
