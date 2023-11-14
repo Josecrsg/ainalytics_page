@@ -1,12 +1,18 @@
-import { FaSearch } from 'react-icons/fa'; // Importar el icono de búsqueda de React
 import { Link, useNavigate } from 'react-router-dom'; // Importar componentes de enrutamiento de React
 import { useSelector } from 'react-redux'; // Importar el selector de Redux
 import { useEffect, useState } from 'react'; // Importar los hooks de efecto y estado de React
+import { FaSearch, FaBars } from 'react-icons/fa'
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user); // Obtener el estado actual del usuario desde Redux
   const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
   const navigate = useNavigate(); // Función de navegación de React Router
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -79,6 +85,42 @@ export default function Header() {
               <li className=' text-slate-700 hover:underline'> Cuenta</li>
             )}
           </Link>
+          <button className='sm:hidden' onClick={toggleMenu}>
+          <FaBars className='text-slate-600' />
+          </button>
+          <ul className={`flex gap-4 ${isMenuOpen ? 'flex' : 'hidden'} sm:flex`}>
+          <Link to='/'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Inicio
+            </li>
+          </Link>
+          <Link to='/services'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Servicios
+            </li>
+          </Link>
+          <Link to='/blogs'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Blogs
+            </li>
+          </Link>
+          <Link to='/contact'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Contacto
+            </li>
+          </Link>
+          <Link to='/profile'>
+            {currentUser ? (
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Cuenta</li>
+            )}
+          </Link>
+        </ul>
         </ul>
       </div>
     </header>
