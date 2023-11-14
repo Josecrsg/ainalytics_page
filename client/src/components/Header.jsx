@@ -13,6 +13,44 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  console.log(isMenuOpen)
+
+  const renderLinks = () => (
+    <>
+      <Link to='/'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Inicio
+            </li>
+          </Link>
+          <Link to='/services'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Servicios
+            </li>
+          </Link>
+          <Link to='/blogs'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Blogs
+            </li>
+          </Link>
+          <Link to='/contact'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Contacto
+            </li>
+          </Link>
+          <Link to='/profile'>
+            {currentUser ? (
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Cuenta</li>
+            )}
+          </Link>
+    </>
+  );
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -54,72 +92,19 @@ export default function Header() {
           </button>
         </form>
         <ul className='flex gap-4'>
-          <Link to='/'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Inicio
-            </li>
-          </Link>
-          <Link to='/services'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Servicios
-            </li>
-          </Link>
-          <Link to='/blogs'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Blogs
-            </li>
-          </Link>
-          <Link to='/contact'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Contacto
-            </li>
-          </Link>
-          <Link to='/profile'>
-            {currentUser ? (
-              <img
-                className='rounded-full h-7 w-7 object-cover'
-                src={currentUser.avatar}
-                alt='profile'
-              />
-            ) : (
-              <li className=' text-slate-700 hover:underline'> Cuenta</li>
-            )}
-          </Link>
-          <button className='sm:hidden' onClick={toggleMenu}>
+         {/* Botón del menú de hamburguesa */}
+        <button className='sm:hidden' onClick={toggleMenu}>
           <FaBars className='text-slate-600' />
-          </button>
-          <ul className={`flex gap-4 ${isMenuOpen ? 'flex' : 'hidden'} sm:flex`}>
-          <Link to='/'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Inicio
-            </li>
-          </Link>
-          <Link to='/services'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Servicios
-            </li>
-          </Link>
-          <Link to='/blogs'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Blogs
-            </li>
-          </Link>
-          <Link to='/contact'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Contacto
-            </li>
-          </Link>
-          <Link to='/profile'>
-            {currentUser ? (
-              <img
-                className='rounded-full h-7 w-7 object-cover'
-                src={currentUser.avatar}
-                alt='profile'
-              />
-            ) : (
-              <li className=' text-slate-700 hover:underline'> Cuenta</li>
-            )}
-          </Link>
+        </button>
+
+        {/* Menú para dispositivos móviles */}
+        <ul className={`absolute top-full left-0 bg-white w-full flex flex-col gap-2 sm:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
+          {renderLinks()}
+        </ul>
+
+        {/* Menú para dispositivos de escritorio */}
+        <ul className='hidden sm:flex gap-4'>
+          {renderLinks()}
         </ul>
         </ul>
       </div>
